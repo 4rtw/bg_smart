@@ -1,0 +1,64 @@
+<div class="container-fluid ">
+	<div class="row">
+		<div class="col-lg-3 bg-white d-none d-lg-block">
+			<a href="" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+				<img class="bgs-logo" src={{ asset("build/images/bgs-couleur.png") }} alt=""/>
+			</a>
+		</div>
+		<div class="col-lg-9 ">
+			<nav class="navbar navbar-expand-lg bg-white navbar-light p-0">
+				<a href="" class="navbar-brand d-block d-lg-none">
+					<img class="bgs-logo" src={{ asset("build/images/bgs-couleur.png") }} alt=""/>
+				</a>
+
+				<button
+					type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+					{#                    <span class="navbar-toggler-icon"></span>#}
+					<div id="menu_root" data-user={{ app.user ? 1: 0 }}></div>
+				</button>
+
+				<div class="collapse navbar-collapse justify-content-between " id="navbarCollapse">
+					<div class="navbar-nav mr-auto py-0 ">
+						{% if app.user %}
+							{% for role in app.user.roles %}
+								{% if(role=='ROLE_ADMIN') %}
+									<a class="nav-item nav-link " href="/admin">Admin</a>
+									{% set break = true %}
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+
+						<a class="nav-item nav-link {{ (value=='accueil')?'active':'' }}" href={{ path('app_home') }}>Home</a>
+						<a class=" nav-item nav-link {{ (value=='nos-services')?'active':'' }}" href={{ path('app_service') }}>Our services</a>
+						{#                        <a class=" nav-item nav-link {{ (value=='blog')?'active':'' }}"#}
+						{#                           href={{ path('app_detail_blog') }} >Blog</a>#}
+						{#                        <div class="nav-item dropdown">#}
+						{#                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>#}
+						{#                               <a class="dropdown-menu rounded-0 m-0">#}
+						{#                                       <a href={{ path('app_latest_blog') }} class="dropdown-item">Latest Blog</a>#}
+						{#                                       <a href={{ path('app_detail_blog') }} class="dropdown-item">Blog Detail</a>#}
+						{#                                 </a>#}
+						{#                            </div>#}
+							<a class="nav-item nav-link {{ (value=='contact')?'active':'' }}" href={{ path('app_contact') }}> Contact</a>
+					</div>
+
+					{% if( app.user ) %}
+						<a href={{ path('app_logout_g') }} class="btn btn-primary mr-3 d-none d-lg-block">
+							Logout
+						</a>
+					{% else %}
+						<a href={{ path('app_sign_up') }} class="btn btn-primary mr-3 d-none d-lg-block">
+							Sign up</a>
+						<a href={{ path('app_login') }} class="btn btn-primary mr-3 d-none d-lg-block">
+							Login</a>
+					{% endif %}
+				</div>
+
+			</nav>
+		</div>
+	</div>
+</div>
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('menu_manager') }}
+{% endblock %}

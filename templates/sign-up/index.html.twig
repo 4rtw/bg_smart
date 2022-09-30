@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+
+{% block body_id 'Sign Up' %}
+
+{% block main %}
+ {% for message in app.flashes('warning') %}
+  <div class="alert alert-danger">{{ message }}</div>
+ {% endfor %}
+ <div class="text-center"><img style="width: 50px; height: auto;margin-top: 30px" src={{ asset("build/images/logo1.png") }}></div>
+ <sign-up data-signup={{ path('sign_up_with_google')}} data-signin={{ path('app_login') }}></sign-up>
+{% endblock %}
+
+{% block javascripts %}
+ {{ encore_entry_script_tags('signup_js_manager') }}
+{% endblock %}
