@@ -27,3 +27,7 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+new_subdomain_biogaz.sh
+new_subdomain_biogaz2.sh
+.gitignore
+composer.lock
